@@ -14,15 +14,9 @@ function SearchArtist() {
   const [artist, setArtist] = useState("");
   const [fetchedData, setFetchedData] = useState("no api called");
 
-  const handleSubmit = (event) => {
-    fetchData(artist);
-    event.preventDefault();
-  };
-
   async function fetchData(artist) {
     const { data } = await axios.get("http://localhost:3001/search/" + artist);
-    console.log("searched");
-    setFetchedData(data);
+    setFetchedData(data.artists.map((obj) => obj.strArtist));
   }
 
   return (
@@ -45,10 +39,10 @@ function SearchArtist() {
         </Grid>
         <Grid item md={2}>
           <Button
-            disableElevation
             variant="contained"
             type="submit"
             className={classes.button}
+            onClick={() => fetchData(artist)}
           >
             Search
           </Button>

@@ -1,6 +1,6 @@
 import Navbar from './Components/Navbar';
 import SearchArtist from './Components/Search'
-import HomePage from './Components/HomePage/HomePage';
+import HomePage from './Components/HomePage';
 import { Container } from '@mui/system';
 
 function App() {
