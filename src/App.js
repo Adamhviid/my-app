@@ -1,5 +1,6 @@
-import Navbar from './Components/Navbar/Navbar';
-import SearchArtist from './Components/Search/SearchArtist'
+import Navbar from './Components/Navbar';
+import SearchArtist from './Components/Search'
+import HomePage from './Components/HomePage/HomePage';
 import { Container } from '@mui/system';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Container maxWidth="sm">
+        <HomePage />
         <SearchArtist />
       </Container>
     </div>

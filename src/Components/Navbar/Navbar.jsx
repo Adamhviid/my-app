@@ -14,6 +14,7 @@ function Navbar() {
   const pages = ["Artists", "Songs", "Albums", "Marketplace"];
 
   function handleOnClick(page) {
+    console.log(page);
     /* TODO: routing to the different pages */
   }
 
@@ -23,9 +24,11 @@ function Navbar() {
         <AppBar position="static" className={classes.navBar}>
           <Toolbar>
             <Grid item md={2}>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                My App
-              </Typography>
+              <MenuItem onClick={() => handleOnClick("Home")}>
+                <Typography variant="h5" component="div">
+                  My App
+                </Typography>
+              </MenuItem>
             </Grid>
             {pages.map((page) => (
               <MenuItem key={page} onClick={() => handleOnClick(page)}>
