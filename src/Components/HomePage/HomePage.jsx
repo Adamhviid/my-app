@@ -1,8 +1,8 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import { Typography } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 
-import SearchArtist from "./SearchArtist";
+import SearchArtist from "../SearchArtist/";
 
 const useStyles = createUseStyles({});
 
@@ -13,6 +13,7 @@ function HomePage() {
       <Typography variant="h3" component="div" gutterBottom>
         Welcome to My App!
       </Typography>
+      <Divider variant="middle" style={{ paddingBottom: '20px' }} /><br />
       <SearchArtist />
     </div>
   );

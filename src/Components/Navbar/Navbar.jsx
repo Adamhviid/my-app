@@ -1,12 +1,7 @@
 import React from "react";
 import { AppBar, Grid, Toolbar, Typography, MenuItem } from "@mui/material";
 import { createUseStyles } from "react-jss";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = createUseStyles({
   navBar: {

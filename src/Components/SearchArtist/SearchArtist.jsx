@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Typography, TextField, Button, Grid } from "@mui/material";
-import axios from "axios";
 import { createUseStyles } from "react-jss";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = createUseStyles({
   button: {
@@ -13,19 +12,15 @@ const useStyles = createUseStyles({
 function SearchArtist() {
   const classes = useStyles();
   const [artist, setArtist] = useState("");
-  const [fetchedData, setFetchedData] = useState("no api called");
 
-  async function fetchData(artist) {
-    const { data } = await axios.get("http://localhost:3001/search/" + artist);
-    setFetchedData(data.artists.map((obj) => obj.strArtist));
-  }
+  const artistLink = "/artist/" + artist;
 
   return (
     <div>
       <Grid container spacing={2}>
         <Grid item md={12}>
           <Typography variant="h5" gutterBottom>
-            How about searching for an artist
+            How about searching for an artist?
           </Typography>
         </Grid>
         <Grid item md={10}>
@@ -39,17 +34,17 @@ function SearchArtist() {
           />
         </Grid>
         <Grid item md={2}>
-          <Button
-            variant="contained"
-            type="submit"
-            className={classes.button}
-            onClick={() => fetchData(artist)}
-          >
-            Search
-          </Button>
+          <Link to={artistLink}>
+            <Button
+              variant="contained"
+              type="submit"
+              className={classes.button}
+            >
+              Search
+            </Button>
+          </Link>
         </Grid>
       </Grid>
-      <div>{fetchedData}</div>
     </div>
   );
 }

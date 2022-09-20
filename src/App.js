@@ -19,7 +19,7 @@ function App() {
             <Route path="/error" element={<ErrorPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/artists" element={<ListArtistPage />} />
-            <Route path='/artist/:artist' element={<ArtistDetailPage />} />
+            <Route path='/artist/:artistName' element={<ArtistDetailPage />} />
           </Routes>
         </Container>
       </div>
