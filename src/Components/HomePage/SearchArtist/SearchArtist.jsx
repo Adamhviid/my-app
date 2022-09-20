@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Typography, TextField, Button, Grid } from "@mui/material";
 import axios from "axios";
 import { createUseStyles } from "react-jss";
+import { Link, withRouter } from "react-router-dom";
 
 const useStyles = createUseStyles({
   button: {
@@ -48,7 +49,7 @@ function SearchArtist() {
           </Button>
         </Grid>
       </Grid>
-      {fetchedData}
+      <div>{fetchedData}</div>
     </div>
   );
 }
