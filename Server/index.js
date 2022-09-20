@@ -82,9 +82,9 @@ app.get("/search/:artist", (req, res) => {
       'X-RapidAPI-Key': 'c0092b6902mshb5ed672ba017d6fp190826jsn09c53c7e81a9',
       'X-RapidAPI-Host': 'theaudiodb.p.rapidapi.com'
     }
-  }; */
+  };
 
-  /* axios.request.then(function (response) {
+  axios.request(options).then(function (response) {
     const data = res.json(response.data)
     console.log(data.artist[2])
   }).catch(function (error) {

@@ -1,58 +1,76 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import { createUseStyles } from "react-jss";
 import {
   Typography,
   Grid,
   Box,
   Card,
   CardActions,
+  CardMedia,
   CardContent,
 } from "@mui/material";
 
-function ArtistDetailPage() {
-  const { artistName } = useParams();
-  const [artist, setArtist] = useState({});
+const useStyles = createUseStyles({
+  img: {
+    borderRadius: "20%",
+    width: "200px",
+    height: "auto",
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: "4em",
+    float: "left",
+  },
+});
 
-  useEffect(() => {
-    fetchData(artistName);
-    document.title = "My App - " + artistName;
-  }, []);
+const ArtistDetailPage = (props) => {
+  const {
+    id,
+    name,
+    bornYear,
+    gender,
+    country,
+    countryCode,
+    label,
+    thumbnail,
+    banner,
+    biography,
+  } = props;
 
-  async function fetchData(artistName) {
-    const { data } = await axios.get(
-      "http://localhost:3001/search/" + artistName
-    );
-    const tmpArray = [];
-    data.artists.map((obj) => tmpArray.push(obj));
-    setArtist(tmpArray[0]);
-  }
+  const classes = useStyles();
 
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid item md={4}>
-          <img src={artist.strArtistThumb} width="200" height="200"/>
+      <Grid container>
+        <Grid item md={12}>
+          {banner ? (
+            <img src={banner} width="100%" />
+          ) : (
+            <Typography gutterBottom className={classes.title}>
+              {name}
+            </Typography>
+          )}
         </Grid>
-        <Grid item md={4}>
-          <Typography variant="h3" component="div" gutterBottom>
-            {artist.strArtist}
-          </Typography>
-        </Grid>
-        <Grid item md={4}>
+        <Grid item md={2}>
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>
-                Facts about {artist.strArtist}
+                Who is {name}
               </Typography>
-              <Typography variant="h7">
-                Born: {artist.intBornYear}
+              <CardMedia
+                component="img"
+                height="194"
+                image={thumbnail}
+                alt="artistThumbnail"
+              />
+              <Typography variant="h7" gutterBottom>
+                Born: {bornYear}
                 <br />
-                Gender: {artist.strGender}
+                Gender: {gender}
                 <br />
-                Country: {artist.strCountry} ({artist.strCountryCode})
+                Country: {country} ({countryCode})
                 <br />
-                Label: {artist.strLabel}
+                Label: {label}
               </Typography>
             </CardContent>
           </Card>
@@ -60,6 +78,6 @@ function ArtistDetailPage() {
       </Grid>
     </div>
   );
-}
+};
 
 export default ArtistDetailPage;
