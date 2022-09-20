@@ -1,22 +1,33 @@
 import React from "react";
 import { AppBar, Grid, Toolbar, Typography, MenuItem } from "@mui/material";
 import { createUseStyles } from "react-jss";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
 
 const useStyles = createUseStyles({
   navBar: {
     background: "#114511",
     marginBottom: "50px",
   },
+  links: {
+    color: "white",
+    "&:hover": {
+      color: "lightgrey",
+    },
+  },
 });
 
 function Navbar() {
   const classes = useStyles();
-  const pages = ["Artists", "Songs", "Albums", "Marketplace"];
-
-  function handleOnClick(page) {
-    console.log(page);
-    /* TODO: routing to the different pages */
-  }
+  const pages = [
+    { label: "Artists", link: "/artists" },
+    { label: "Songs", link: "/songs" },
+    { label: "Albums", link: "/albums" },
+  ];
 
   return (
     <div>
@@ -24,15 +35,25 @@ function Navbar() {
         <AppBar position="static" className={classes.navBar}>
           <Toolbar>
             <Grid item md={2}>
-              <MenuItem onClick={() => handleOnClick("Home")}>
-                <Typography variant="h5" component="div">
-                  My App
-                </Typography>
+              <MenuItem>
+                <Link to="/">
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    className={classes.links}
+                  >
+                    My App
+                  </Typography>
+                </Link>
               </MenuItem>
             </Grid>
             {pages.map((page) => (
-              <MenuItem key={page} onClick={() => handleOnClick(page)}>
-                <Typography textAlign="center">{page}</Typography>
+              <MenuItem key={page.label}>
+                <Link to={page.link}>
+                  <Typography textAlign="center" className={classes.links}>
+                    {page.label}
+                  </Typography>
+                </Link>
               </MenuItem>
             ))}
           </Toolbar>
