@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 import {
   Typography,
-  Button,
+  Grid,
   Card,
   CardActions,
   CardContent,
@@ -22,13 +22,19 @@ const ArtistBiography = (props) => {
   return (
     <div>
       <Card sx={{ maxHeight: expanded, maxWidth: 450 }}>
-        <Typography onClick={() => handleExpandClick()}>
-          {name + "'s biography"} <ExpandMoreIcon fontSize="small" />
-        </Typography>
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {biography}
+          <Typography
+            color="text.secondary"
+            gutterBottom
+            onClick={() => handleExpandClick()}
+          >
+            {name + "'s biography"} <ExpandMoreIcon fontSize="small" />
           </Typography>
+          <CardContent>
+            <Typography variant="body2" color="text.secondary">
+              {biography}
+            </Typography>
+          </CardContent>
         </CardContent>
       </Card>
     </div>
