@@ -41,7 +41,7 @@ app.get("/search/artist/:artist", (req, res) => {
 app.get("/search/albums/:artist", (req, res) => {
   const options = {
     method: 'GET',
-    url: 'https://theaudiodb.p.rapidapi.com/discography.php',
+    url: 'https://theaudiodb.p.rapidapi.com/searchalbum.php',
     params: { s: req.params.artist },
     headers: {
       'X-RapidAPI-Key': APIKey,
@@ -55,4 +55,5 @@ app.get("/search/albums/:artist", (req, res) => {
     console.error(error);
   });
 })
+
 

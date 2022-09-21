@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import ArtistDetails from "./PageFunctionality/Details";
 import ArtistBiography from "./PageFunctionality/Biography";
@@ -58,7 +58,15 @@ function ArtistPage() {
   return (
     <div>
       <Grid container spacing={2}>
-        <ArtistBanner banner={banner} name={name} />
+        <Grid item md={12}>
+          <ArtistBanner banner={banner} name={name} />
+          <br />
+          <br />
+          <Typography variant="h5" gutterBottom>
+            Albums
+          </Typography>
+          <ArtistAlbums albums={albums} />
+        </Grid>
 
         {/* left collumn */}
         <Grid item md={6}>
@@ -73,7 +81,6 @@ function ArtistPage() {
             thumbnail={thumbnail}
             banner={banner}
           />
-          <ArtistAlbums albums={albums} />
         </Grid>
 
         {/* Right collumn */}
