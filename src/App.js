@@ -4,6 +4,7 @@ import HomePage from './Components/HomePage';
 import ListArtistPage from './Components/ListArtistPage';
 import ArtistPage from './Components/ArtistDetailPage/ArtistPage';
 import ErrorPage from './Components/ErrorPage';
+import LoginPage from './Components/LoginPage/';
 
 import { Route, useParams, Routes, BrowserRouter } from "react-router-dom";
 import { Paper } from '@mui/material';
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/artists" element={<ListArtistPage />} />
             <Route path='/artist/:artistName' element={<ArtistPage />} />
+            <Route path='/login/' element={<LoginPage />} />
           </Routes>
         </Container>
       </div>
