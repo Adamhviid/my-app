@@ -43,13 +43,13 @@ function Navbar() {
               </MenuItem>
             </Grid>
             {pages.map((page) => (
-              <MenuItem key={page.label}>
-                <Link to={page.link}>
+              <Link to={page.link}>
+                <MenuItem key={page.label}>
                   <Typography textAlign="center" className={classes.links}>
                     {page.label}
                   </Typography>
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
             ))}
           </Toolbar>
         </AppBar>
