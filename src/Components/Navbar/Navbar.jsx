@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 const useStyles = createUseStyles({
   navBar: {
-    background: "#114511",
+    background: "#3B719F",
     marginBottom: "50px",
   },
   links: {
     color: "white",
     "&:hover": {
-      color: "lightgrey",
+      color: "black",
     },
   },
 });

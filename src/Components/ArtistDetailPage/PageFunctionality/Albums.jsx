@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, CardMedia, Paper } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Card, CardMedia, Paper, Typography } from "@mui/material";
 import Carousel from "react-grid-carousel";
 import { createUseStyles } from "react-jss";
 
@@ -13,39 +13,62 @@ const ArtistAlbums = (props) => {
   const { albums } = props;
   const classes = useStyles();
 
+  const [showDots, setShowDots] = useState(true);
+  const [hideArrow, setHideArrow] = useState(false);
+  const [numbOfRows, setNumbOfRows] = useState(2);
+
+  useEffect(() => {
+    if (albums.length <= 5) {
+      setShowDots(false);
+      setHideArrow(true);
+      setNumbOfRows(1);
+    } else {
+      setShowDots(true);
+      setHideArrow(false);
+      setNumbOfRows(2);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [albums]);
+
   function handleOnClick(value) {
     console.log(value);
   }
 
   return (
     <div>
-      <Carousel
-        cols={5}
-        rows={2}
-        gap={20}
-        showDots
-        loop
-        dotColorActive="#114511"
-      >
-        {albums.map((item, index) => (
-          <Carousel.Item key={index}>
-            <Paper variant="outlined" elevation={12}>
-              <Card
-                sx={{ maxWidth: 200 }}
-                onClick={() => handleOnClick(item.idAlbum)}
-                className={classes.card}
-              >
-                <CardMedia
-                  component="img"
-                  image={item.strAlbumThumb}
-                  alt="Paella dish"
-                />
-              </Card>
-            </Paper>
-            <br />
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      {albums ? (
+        <div>
+          <br />
+          <Carousel
+            cols={5}
+            rows={numbOfRows}
+            gap={20}
+            showDots={showDots}
+            hideArrow={hideArrow}
+            loop
+            dotColorActive="#3B719F"
+          >
+            {albums.map((item, index) => (
+              <Carousel.Item key={index}>
+                <Paper elevation={12}>
+                  <Card
+                    sx={{ maxWidth: 200 }}
+                    onClick={() => handleOnClick(item.idAlbum)}
+                    className={classes.card}
+                  >
+                    <CardMedia
+                      component="img"
+                      image={item.strAlbumThumb}
+                      alt="Paella dish"
+                    />
+                  </Card>
+                </Paper>
+                <br />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
+      ) : null}
     </div>
   );
 };

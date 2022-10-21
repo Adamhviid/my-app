@@ -16,7 +16,7 @@ const ArtistBiography = (props) => {
   const [expanded, setExpanded] = useState(200);
 
   const handleExpandClick = () => {
-    expanded == 200 ? setExpanded(1000) : setExpanded(200);
+    expanded === 200 ? setExpanded(1000) : setExpanded(200);
   };
 
   return (

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = createUseStyles({
   button: {
-    background: "#114511",
+    background: "#3B719F",
   },
 });
 

@@ -14,6 +14,7 @@ const useStyles = createUseStyles({
   loader: {
     width: "50%",
     margin: "0 auto",
+    backgroundColor: "#3B719F",
   },
 });
 
@@ -69,7 +70,6 @@ function ArtistPage() {
     <div>
       <BarLoader
         className={classes.loader}
-        color="#114511"
         loading={artistLoading}
         width={"50%"}
       />
@@ -77,15 +77,9 @@ function ArtistPage() {
         <Grid container spacing={2}>
           <Grid item md={12}>
             <ArtistBanner banner={banner} name={name} />
-            <br />
-            <br />
-            <Typography variant="h5" gutterBottom>
-              Albums
-            </Typography>
             <ArtistAlbums albums={albums} />
             <BarLoader
               className={classes.loader}
-              color="#114511"
               loading={albumLoading}
               width={"50%"}
             />
