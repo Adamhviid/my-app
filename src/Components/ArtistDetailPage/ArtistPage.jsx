@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Grid, Typography } from "@mui/material";
+import { createUseStyles } from "react-jss";
 import BarLoader from "react-spinners/BarLoader";
 
 import ArtistDetails from "./PageFunctionality/Details";
@@ -9,7 +10,15 @@ import ArtistBiography from "./PageFunctionality/Biography";
 import ArtistAlbums from "./PageFunctionality/Albums";
 import ArtistBanner from "./PageFunctionality/Banner";
 
+const useStyles = createUseStyles({
+  loader: {
+    width: "50%",
+    margin: "0 auto",
+  },
+});
+
 function ArtistPage() {
+  const classes = useStyles();
   const { artistName } = useParams();
   const [name, setName] = useState();
   const [id, setId] = useState();
@@ -23,6 +32,7 @@ function ArtistPage() {
   const [biography, setBiography] = useState();
   const [albums, setAlbums] = useState([]);
   const [albumLoading, setAlbumLoading] = useState(true);
+  const [artistLoading, setArtistLoading] = useState(true);
 
   useEffect(() => {
     fetchDetails(artistName);
@@ -32,66 +42,74 @@ function ArtistPage() {
 
   async function fetchDetails(artistName) {
     const { data } = await axios.get(
-      "http://localhost:3001/search/artist/" + artistName
+      "http://localhost:3001/db/search/artist/" + artistName
     );
-    const tmpArray = [];
-    data.artists.map((obj) => tmpArray.push(obj));
-    setId(tmpArray[0].idArtist);
-    setName(tmpArray[0].strArtist);
-    setBornYear(tmpArray[0].intBornYear);
-    setGender(tmpArray[0].strGender);
-    setCountry(tmpArray[0].strCountry);
-    setCountryCode(tmpArray[0].strCountryCode);
-    setLabel(tmpArray[0].strLabel);
-    setThumbnail(tmpArray[0].strArtistThumb);
-    setBanner(tmpArray[0].strArtistBanner);
-    setBiography(tmpArray[0].strBiographyEN);
+    setId(data.idArtist);
+    setName(data.strArtist);
+    setBornYear(data.intBornYear);
+    setGender(data.strGender);
+    setCountry(data.strCountry);
+    setCountryCode(data.strCountryCode);
+    setLabel(data.strLabel);
+    setThumbnail(data.strArtistThumb);
+    setBanner(data.strArtistBanner);
+    setBiography(data.strBiographyEN);
+    setArtistLoading(false);
   }
 
   async function fetchAlbums(artistName) {
     const { data } = await axios.get(
-      "http://localhost:3001/search/albums/" + artistName
+      "http://localhost:3001/db/search/albums/" + artistName
     );
-    const tmpArray = [];
-    data.album.map((obj) => tmpArray.push(obj));
-    setAlbums(tmpArray);
+    setAlbums(data);
     setAlbumLoading(false);
   }
 
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid item md={12}>
-          <ArtistBanner banner={banner} name={name} />
-          <br />
-          <br />
-          <Typography variant="h5" gutterBottom>
-            Albums
-          </Typography>
-          <ArtistAlbums albums={albums} />
-          <BarLoader color="#36d7b7" loading={albumLoading} />
-        </Grid>
+      <BarLoader
+        className={classes.loader}
+        color="#114511"
+        loading={artistLoading}
+        width={"50%"}
+      />
+      {artistLoading === false ? (
+        <Grid container spacing={2}>
+          <Grid item md={12}>
+            <ArtistBanner banner={banner} name={name} />
+            <br />
+            <br />
+            <Typography variant="h5" gutterBottom>
+              Albums
+            </Typography>
+            <ArtistAlbums albums={albums} />
+          </Grid>
 
-        {/* left collumn */}
-        <Grid item md={6}>
-          <ArtistDetails
-            id={id}
-            name={name}
-            bornYear={bornYear}
-            gender={gender}
-            country={country}
-            countryCode={countryCode}
-            label={label}
-            thumbnail={thumbnail}
-            banner={banner}
-          />
-        </Grid>
+          {/* left collumn */}
+          <Grid item md={6}>
+            <ArtistDetails
+              id={id}
+              name={name}
+              bornYear={bornYear}
+              gender={gender}
+              country={country}
+              countryCode={countryCode}
+              label={label}
+              thumbnail={thumbnail}
+              banner={banner}
+            />
+          </Grid>
 
-        {/* Right collumn */}
-        <Grid item md={6}>
-          <ArtistBiography biography={biography} name={name} />
+          {/* Right collumn */}
+          <Grid item md={6}>
+            <ArtistBiography biography={biography} name={name} />
+          </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <div>
+          <h2>Fetching artist</h2>
+        </div>
+      )}
     </div>
   );
 }
