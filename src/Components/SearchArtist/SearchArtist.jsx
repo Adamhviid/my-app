@@ -15,36 +15,43 @@ function SearchArtist() {
 
   const artistLink = "/artist/" + artist;
 
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    // send state to server with e.g. `window.fetch`
+  };
+
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid item md={12}>
-          <Typography variant="h5" gutterBottom>
-            How about searching for an artist?
-          </Typography>
+      <form onSubmit={onFormSubmit}>
+        <Grid container spacing={2}>
+          <Grid item md={12}>
+            <Typography variant="h5" gutterBottom>
+              How about searching for an artist?
+            </Typography>
+          </Grid>
+          <Grid item md={10}>
+            <TextField
+              fullWidth
+              required
+              label="Artist"
+              variant="outlined"
+              value={artist}
+              onChange={(event) => setArtist(event.target.value)}
+            />
+          </Grid>
+          <Grid item md={2}>
+            <Link to={artistLink}>
+              <Button
+                className={classes.button}
+                variant="contained"
+                type="submit"
+              >
+                Search
+              </Button>
+            </Link>
+          </Grid>
         </Grid>
-        <Grid item md={10}>
-          <TextField
-            required
-            fullWidth
-            label="Artist"
-            variant="outlined"
-            value={artist}
-            onChange={(event) => setArtist(event.target.value)}
-          />
-        </Grid>
-        <Grid item md={2}>
-          <Link to={artistLink}>
-            <Button
-              variant="contained"
-              type="submit"
-              className={classes.button}
-            >
-              Search
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
+      </form>
     </div>
   );
 }

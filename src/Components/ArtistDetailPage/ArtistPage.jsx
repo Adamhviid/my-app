@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { createUseStyles } from "react-jss";
 import BarLoader from "react-spinners/BarLoader";
 
@@ -14,7 +14,6 @@ const useStyles = createUseStyles({
   loader: {
     width: "50%",
     margin: "0 auto",
-    backgroundColor: "#3B719F",
   },
 });
 
@@ -69,6 +68,7 @@ function ArtistPage() {
   return (
     <div>
       <BarLoader
+        color="#3B719F"
         className={classes.loader}
         loading={artistLoading}
         width={"50%"}
@@ -79,6 +79,7 @@ function ArtistPage() {
             <ArtistBanner banner={banner} name={name} />
             <ArtistAlbums albums={albums} />
             <BarLoader
+              color="#3B719F"
               className={classes.loader}
               loading={albumLoading}
               width={"50%"}

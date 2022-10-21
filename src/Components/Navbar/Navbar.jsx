@@ -14,6 +14,9 @@ const useStyles = createUseStyles({
       color: "black",
     },
   },
+  profile: {
+    float: "right",
+  },
 });
 
 function Navbar() {
@@ -51,6 +54,19 @@ function Navbar() {
                 </MenuItem>
               </Link>
             ))}
+            <Grid item md={10} >
+              <MenuItem className={classes.profile}>
+                <Link to="/login">
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    className={classes.links}
+                  >
+                    My Profile
+                  </Typography>
+                </Link>
+              </MenuItem>
+            </Grid>
           </Toolbar>
         </AppBar>
       </Grid>
