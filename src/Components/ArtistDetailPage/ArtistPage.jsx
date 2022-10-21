@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Grid, Typography } from "@mui/material";
+import BarLoader from "react-spinners/BarLoader";
 
 import ArtistDetails from "./PageFunctionality/Details";
 import ArtistBiography from "./PageFunctionality/Biography";
@@ -21,12 +22,13 @@ function ArtistPage() {
   const [banner, setBanner] = useState();
   const [biography, setBiography] = useState();
   const [albums, setAlbums] = useState([]);
+  const [albumLoading, setAlbumLoading] = useState(true);
 
   useEffect(() => {
     fetchDetails(artistName);
     fetchAlbums(artistName);
     document.title = "My App - " + artistName;
-  }, []);
+  }, [artistName]);
 
   async function fetchDetails(artistName) {
     const { data } = await axios.get(
@@ -53,6 +55,7 @@ function ArtistPage() {
     const tmpArray = [];
     data.album.map((obj) => tmpArray.push(obj));
     setAlbums(tmpArray);
+    setAlbumLoading(false);
   }
 
   return (
@@ -66,6 +69,7 @@ function ArtistPage() {
             Albums
           </Typography>
           <ArtistAlbums albums={albums} />
+          <BarLoader color="#36d7b7" loading={albumLoading} />
         </Grid>
 
         {/* left collumn */}
