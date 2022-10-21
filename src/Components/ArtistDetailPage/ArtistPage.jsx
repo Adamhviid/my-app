@@ -83,6 +83,12 @@ function ArtistPage() {
               Albums
             </Typography>
             <ArtistAlbums albums={albums} />
+            <BarLoader
+              className={classes.loader}
+              color="#114511"
+              loading={albumLoading}
+              width={"50%"}
+            />
           </Grid>
 
           {/* left collumn */}
