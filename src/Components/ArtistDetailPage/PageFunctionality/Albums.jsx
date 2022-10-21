@@ -29,7 +29,7 @@ const ArtistAlbums = (props) => {
       >
         {albums.map((item, index) => (
           <Carousel.Item key={index}>
-            <Paper variant="outlined" elevation={12}>
+            <Paper elevation={12}>
               <Card
                 sx={{ maxWidth: 200 }}
                 onClick={() => handleOnClick(item.idAlbum)}

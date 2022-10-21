@@ -13,7 +13,8 @@ function HomePage() {
       <Typography variant="h3" component="div" gutterBottom>
         Welcome to My App!
       </Typography>
-      <Divider variant="middle" style={{ paddingBottom: '20px' }} /><br />
+      <Divider variant="middle" style={{ paddingBottom: "20px" }} />
+      <br />
       <SearchArtist />
     </div>
   );

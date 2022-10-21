@@ -26,33 +26,29 @@ function ArtistPage() {
     fetchDetails(artistName);
     fetchAlbums(artistName);
     document.title = "My App - " + artistName;
-  }, []);
+  }, [artistName]);
 
   async function fetchDetails(artistName) {
     const { data } = await axios.get(
-      "http://localhost:3001/search/artist/" + artistName
+      "http://localhost:3001/db/search/artist/" + artistName
     );
-    const tmpArray = [];
-    data.artists.map((obj) => tmpArray.push(obj));
-    setId(tmpArray[0].idArtist);
-    setName(tmpArray[0].strArtist);
-    setBornYear(tmpArray[0].intBornYear);
-    setGender(tmpArray[0].strGender);
-    setCountry(tmpArray[0].strCountry);
-    setCountryCode(tmpArray[0].strCountryCode);
-    setLabel(tmpArray[0].strLabel);
-    setThumbnail(tmpArray[0].strArtistThumb);
-    setBanner(tmpArray[0].strArtistBanner);
-    setBiography(tmpArray[0].strBiographyEN);
+    setId(data.idArtist);
+    setName(data.strArtist);
+    setBornYear(data.intBornYear);
+    setGender(data.strGender);
+    setCountry(data.strCountry);
+    setCountryCode(data.strCountryCode);
+    setLabel(data.strLabel);
+    setThumbnail(data.strArtistThumb);
+    setBanner(data.strArtistBanner);
+    setBiography(data.strBiographyEN);
   }
 
   async function fetchAlbums(artistName) {
     const { data } = await axios.get(
-      "http://localhost:3001/search/albums/" + artistName
+      "http://localhost:3001/db/search/albums/" + artistName
     );
-    const tmpArray = [];
-    data.album.map((obj) => tmpArray.push(obj));
-    setAlbums(tmpArray);
+    setAlbums(data);
   }
 
   return (
