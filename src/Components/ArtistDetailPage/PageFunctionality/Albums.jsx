@@ -60,6 +60,8 @@ const ArtistAlbums = (props) => {
                       component="img"
                       image={item.strAlbumThumb}
                       alt="Paella dish"
+                      type="image/webp"
+                      loading="lazy"
                     />
                   </Card>
                 </Paper>

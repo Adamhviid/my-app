@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { Button, Typography, Divider, Grid } from "@mui/material";
 import CustomTextField from "./TextFields/CustomTextField";
@@ -12,6 +12,10 @@ const useStyles = createUseStyles({
 function Login() {
   const classes = useStyles();
 
+  useEffect(() => {
+    document.title = "My App - Login";
+  }, []);
+
   return (
     <div className={classes.container}>
       <Typography variant="h3" component="div" gutterBottom>
@@ -19,10 +23,10 @@ function Login() {
       </Typography>
       <Divider variant="middle" style={{ paddingBottom: "20px" }} />
       <br />
+      <Grid item md={12}>
+        <Typography variant="h5">How about logging in?</Typography>
+      </Grid>
       <Grid container spacing={2} style={{ textAlign: "center" }}>
-        <Grid item md={12}>
-          <Typography variant="h5">How about logging in?</Typography>
-        </Grid>
         <Grid item md={12}>
           <CustomTextField type={"email"} />
         </Grid>
