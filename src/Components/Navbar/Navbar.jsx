@@ -33,8 +33,8 @@ function Navbar() {
         <AppBar position="static" className={classes.navBar}>
           <Toolbar>
             <Grid item md={2}>
-              <MenuItem>
-                <Link to="/">
+              <MenuItem >
+                <Link to="/" key={"Logo"}>
                   <Typography
                     variant="h5"
                     component="div"
@@ -46,8 +46,8 @@ function Navbar() {
               </MenuItem>
             </Grid>
             {pages.map((page) => (
-              <Link to={page.link}>
-                <MenuItem key={page.label}>
+              <Link to={page.link} key={page.label}>
+                <MenuItem>
                   <Typography textAlign="center" className={classes.links}>
                     {page.label}
                   </Typography>
@@ -56,7 +56,7 @@ function Navbar() {
             ))}
             <Grid item md={10} >
               <MenuItem className={classes.profile}>
-                <Link to="/login">
+                <Link to="/login" key={"Login"} >
                   <Typography
                     variant="h5"
                     component="div"
