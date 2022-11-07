@@ -2,7 +2,6 @@ import Navbar from './Components/Navbar';
 import { Container } from '@mui/system';
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
-import { history } from './services/history';
 import HomePage from './Components/HomePage';
 import ListArtistPage from './Components/ListArtistPage';
 import ArtistPage from './Components/ArtistDetailPage/ArtistPage';
@@ -12,7 +11,7 @@ import RegisterPage from './Components/RegisterPage/';
 
 function App() {
   return (
-    <BrowserRouter hisotry={history}>
+    <BrowserRouter>
       <div className="App">
         <Navbar />
         <Container maxWidth="md">

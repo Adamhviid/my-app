@@ -16,38 +16,10 @@ function Login() {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [token, setToken] = useState();
 
   useEffect(() => {
     document.title = "My App - Login";
   }, []);
-
-  const handleSubmit = () => {
-    //reqres registered sample user
-    const loginPayload = {
-      /* email: email,
-      password: password, */
-      email: "eve.holt@reqres.in",
-      password: "cityslicka",
-    };
-
-    axios
-      .post("https://reqres.in/api/login", loginPayload)
-      .then((response) => {
-        //get token from response
-        const token = response.data.token;
-
-        //set JWT token to local
-        localStorage.setItem('token', token);
-
-        //set token to axios common header
-        setToken(token);
-
-        //redirect user to home page
-        window.location.href = "/";
-      })
-      .catch((err) => console.log(err));
-  };
 
   return (
     <div className={classes.container}>
@@ -62,7 +34,7 @@ function Login() {
       <br />
       <form
         onSubmit={() => {
-          handleSubmit();
+          /*  handleSubmit(); */
         }}
       >
         <Grid container spacing={2} style={{ textAlign: "center" }}>
@@ -97,7 +69,7 @@ function Login() {
             <Typography gutterBottom>
               Don't have an account yet?
               <Link to="/register" key={"Register"}>
-              <a href="/register"> Register here</a>
+                <a href="/register"> Register here</a>
               </Link>
             </Typography>
           </Grid>
@@ -106,9 +78,5 @@ function Login() {
     </div>
   );
 }
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};
 
 export default Login;
