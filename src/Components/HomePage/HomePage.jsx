@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { createUseStyles } from "react-jss";
-import { Typography, Divider } from "@mui/material";
 
 import SearchArtist from "../SearchArtist/";
+import PageTemplate from "../Common/PageTemplate";
 
 const useStyles = createUseStyles({});
 
@@ -15,11 +15,7 @@ function HomePage() {
 
   return (
     <div className={classes.background}>
-      <Typography variant="h3" component="div" gutterBottom>
-        Welcome to My App!
-      </Typography>
-      <Divider variant="middle" style={{ paddingBottom: "20px" }} />
-      <br />
+      <PageTemplate title="App" subtitle="searching for an artist" />
       <SearchArtist />
     </div>
   );

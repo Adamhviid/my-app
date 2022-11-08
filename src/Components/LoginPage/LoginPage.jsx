@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { createUseStyles } from "react-jss";
 import { Button, Typography, Divider, Grid, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
+import PageTemplate from "../Common/PageTemplate";
 
 const useStyles = createUseStyles({
   button: {
@@ -23,15 +23,7 @@ function Login() {
 
   return (
     <div className={classes.container}>
-      <Typography variant="h3" component="div" gutterBottom>
-        Welcome to My Login!
-      </Typography>
-      <Divider variant="middle" style={{ paddingBottom: "20px" }} />
-      <br />
-      <Grid item md={12}>
-        <Typography variant="h5">How about logging in?</Typography>
-      </Grid>
-      <br />
+      <PageTemplate title="Login" subtitle="logging in" />
       <form
         onSubmit={() => {
           /*  handleSubmit(); */

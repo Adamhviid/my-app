@@ -1,4 +1,4 @@
-import Navbar from './Components/Navbar';
+import Navbar from './Components/Common/Navbar';
 import { Container } from '@mui/system';
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 

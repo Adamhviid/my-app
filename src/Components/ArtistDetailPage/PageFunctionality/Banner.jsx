@@ -18,7 +18,7 @@ const ArtistBanner = (props) => {
   return (
     <>
       {banner ? (
-        <img src={banner} width="100%" />
+        <img src={banner} width="100%" alt="Artist Banner" />
       ) : (
         <Typography gutterBottom className={classes.title}>
           {name}

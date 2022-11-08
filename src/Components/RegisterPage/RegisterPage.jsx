@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 import { Button, Typography, Divider, Grid, TextField } from "@mui/material";
 import axios from "axios";
+
+import PageTemplate from "../Common/PageTemplate";
 
 const useStyles = createUseStyles({
   button: {
@@ -16,34 +17,17 @@ function RegisterPage() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const handleSubmit = (e) => {
-    alert("You have successfully registered!" + email + password);
-    const user = {
+  const handleSubmit = async (e) => {
+    await axios.post("http://localhost:3001/auth/register", {
       email: email.toLowerCase(),
       password: password,
-    };
-    const jsonUser = JSON.stringify(user);
-    return axios
-      .post("http://localhost:3001/auth/register", {
-        email: email.toLowerCase(),
-        password: password,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+    });
+    window.location.href = "/login";
   };
 
   return (
     <div className={classes.container}>
-      <Typography variant="h3" component="div" gutterBottom>
-        Welcome to My Register!
-      </Typography>
-      <Divider variant="middle" style={{ paddingBottom: "20px" }} />
-      <br />
-      <Grid item md={12}>
-        <Typography variant="h5">How about registering an account?</Typography>
-      </Grid>
-      <br />
+      <PageTemplate title="Register" subtitle="registering an account" />
       <Grid container spacing={2} style={{ textAlign: "center" }}>
         <Grid item md={12}>
           <TextField

@@ -1,28 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { createUseStyles } from "react-jss";
-import {
-  Typography,
-  Grid,
-  Box,
-  Card,
-  CardActions,
-  CardMedia,
-  CardContent,
-} from "@mui/material";
-
-const useStyles = createUseStyles({
-  img: {
-    borderRadius: "20%",
-    width: "200px",
-    height: "auto",
-  },
-});
+import React from "react";
+import { Typography, Card, CardMedia, CardContent } from "@mui/material";
 
 const ArtistDetailPage = (props) => {
   const { name, bornYear, gender, country, countryCode, label, thumbnail } =
     props;
-
-  const classes = useStyles();
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardMedia, Paper, Typography } from "@mui/material";
+import { Card, CardMedia, Paper } from "@mui/material";
 import Carousel from "react-grid-carousel";
 import { createUseStyles } from "react-jss";
 
@@ -28,7 +28,7 @@ const ArtistAlbums = (props) => {
       setNumbOfRows(2);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [albums]);
+  }, []);
 
   function handleOnClick(value) {
     console.log(value);

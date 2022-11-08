@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import { createUseStyles } from "react-jss";
-import {
-  Typography,
-  Grid,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-} from "@mui/material";
+import { Typography, Card, CardContent } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const ArtistBiography = (props) => {
   const { biography, name } = props;
-
+  
   const [expanded, setExpanded] = useState(200);
 
   const handleExpandClick = () => {
