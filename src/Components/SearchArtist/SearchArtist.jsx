@@ -22,7 +22,7 @@ function SearchArtist() {
           <TextField
             fullWidth
             required
-            label="Name of artist here..."
+            label="Artist name..."
             variant="outlined"
             value={artist}
             onChange={(event) => setArtist(event.target.value)}

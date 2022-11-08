@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import { createUseStyles } from "react-jss";
 import BarLoader from "react-spinners/BarLoader";
 
@@ -67,50 +67,52 @@ function ArtistPage() {
 
   return (
     <div>
-      <BarLoader
-        color="#3B719F"
-        className={classes.loader}
-        loading={artistLoading}
-        width={"50%"}
-      />
-      {artistLoading === false ? (
-        <Grid container spacing={2}>
-          <Grid item md={12}>
-            <ArtistBanner banner={banner} name={name} />
-            <ArtistAlbums albums={albums} />
-            <BarLoader
-              color="#3B719F"
-              className={classes.loader}
-              loading={albumLoading}
-              width={"50%"}
-            />
-          </Grid>
+      <ArtistBanner banner={banner} name={name} />
+      <Paper elevation={12} style={{ padding: "2%" }}>
+        <BarLoader
+          color="#3B719F"
+          className={classes.loader}
+          loading={artistLoading}
+          width={"50%"}
+        />
+        {artistLoading === false ? (
+          <Grid container spacing={2}>
+            <Grid item md={12}>
+              <ArtistAlbums albums={albums} />
+              <BarLoader
+                color="#3B719F"
+                className={classes.loader}
+                loading={albumLoading}
+                width={"50%"}
+              />
+            </Grid>
 
-          {/* left collumn */}
-          <Grid item md={6}>
-            <ArtistDetails
-              id={id}
-              name={name}
-              bornYear={bornYear}
-              gender={gender}
-              country={country}
-              countryCode={countryCode}
-              label={label}
-              thumbnail={thumbnail}
-              banner={banner}
-            />
-          </Grid>
+            {/* left collumn */}
+            <Grid item md={6}>
+              <ArtistDetails
+                id={id}
+                name={name}
+                bornYear={bornYear}
+                gender={gender}
+                country={country}
+                countryCode={countryCode}
+                label={label}
+                thumbnail={thumbnail}
+                banner={banner}
+              />
+            </Grid>
 
-          {/* Right collumn */}
-          <Grid item md={6}>
-            <ArtistBiography biography={biography} name={name} />
+            {/* Right collumn */}
+            <Grid item md={6}>
+              <ArtistBiography biography={biography} name={name} />
+            </Grid>
           </Grid>
-        </Grid>
-      ) : (
-        <div>
-          <h2>Fetching artist</h2>
-        </div>
-      )}
+        ) : (
+          <div>
+            <h2>Fetching artist</h2>
+          </div>
+        )}
+      </Paper>
     </div>
   );
 }

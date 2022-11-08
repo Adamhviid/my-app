@@ -2,15 +2,23 @@ body {
   margin: 0;
 }
 
+.MuiPaper-root {
+  opacity: 1;
+}
+
+.MuiPaper-child {
+  opacity: 1;
+}
+
 .header {
   position: relative;
   background: linear-gradient(60deg, #3B719F 0%, #fff 100%);
-  color: #fff;
+  color: rgb(255, 255, 255);
   text-shadow: #3B719F 0 0 1px;
 }
 
 .inner-header {
-  height: 10vh;
+  height: 30vh;
   width: 100%;
   margin: 0;
   padding: 0;
