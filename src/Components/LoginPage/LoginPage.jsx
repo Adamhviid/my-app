@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
-import { Button, Typography, Divider, Grid, TextField } from "@mui/material";
+import { Button, Typography, Grid, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import PageTemplate from "../Common/PageTemplate";
 
@@ -21,52 +22,62 @@ function Login() {
     document.title = "My App - Login";
   }, []);
 
+  const handleSubmit = async (e) => {
+    await axios
+      .post("http://localhost:3001/auth/login", {
+        email: email.toLowerCase(),
+        password: password,
+      })
+      .then((res) => {
+        localStorage.setItem("jwt_token", res.data.token);
+        window.location.href = "/profile";
+      })
+      .catch((res, err) => {
+        console.log("wtf???: " + res);
+      });
+  };
+
   return (
-    <div className={classes.container}>
+    <div>
       <PageTemplate title="Login" subtitle="logging in" />
-      <form
-        onSubmit={() => {
-          /*  handleSubmit(); */
-        }}
-      >
-        <Grid container spacing={2} style={{ textAlign: "center" }}>
-          <Grid item md={12}>
-            <TextField
-              label={"Email..."}
-              type={"email"}
-              variant="outlined"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Grid>
-          <Grid item md={12}>
-            <TextField
-              label={"Password..."}
-              type={"password"}
-              variant="outlined"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Grid>
-          <Grid item md={12}>
-            <Button
-              className={classes.button}
-              variant="contained"
-              type="submit"
-            >
-              Log in
-            </Button>
-          </Grid>
-          <br />
-          <br />
-          <Grid item md={12}>
-            <Typography gutterBottom>
-              Don't have an account yet?
-              <Link to="/register" key={"Register"}>
-                <a href="/register"> Register here</a>
-              </Link>
-            </Typography>
-          </Grid>
+      <Grid container spacing={2} style={{ textAlign: "center" }}>
+        <Grid item md={12}>
+          <TextField
+            label={"Email..."}
+            type={"email"}
+            variant="outlined"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Grid>
-      </form>
+        <Grid item md={12}>
+          <TextField
+            label={"Password..."}
+            type={"password"}
+            variant="outlined"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Grid>
+        <Grid item md={12}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            onClick={() => handleSubmit()}
+          >
+            Log in
+          </Button>
+        </Grid>
+        <br />
+        <br />
+        <Grid item md={12}>
+          <Typography gutterBottom>
+            Don't have an account yet?
+            <br />
+            <Link to="/register" key={"Register"}>
+              Register here
+            </Link>
+          </Typography>
+        </Grid>
+      </Grid>
     </div>
   );
 }

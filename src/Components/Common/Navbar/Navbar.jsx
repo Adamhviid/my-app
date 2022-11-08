@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { AppBar, Grid, Toolbar, Typography, MenuItem } from "@mui/material";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
@@ -27,13 +27,23 @@ function Navbar() {
     { label: "Albums", link: "/albums" },
   ];
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt_token");
+    if (token) {
+      setLoggedIn(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       <Grid container>
         <AppBar position="static" className={classes.navBar}>
           <Toolbar>
             <Grid item md={2}>
-              <MenuItem >
+              <MenuItem>
                 <Link to="/" key={"Logo"}>
                   <Typography
                     variant="h5"
@@ -46,26 +56,42 @@ function Navbar() {
               </MenuItem>
             </Grid>
             {pages.map((page) => (
-              <Link to={page.link} key={page.label}>
-                <MenuItem>
-                  <Typography textAlign="center" className={classes.links}>
-                    {page.label}
-                  </Typography>
-                </MenuItem>
-              </Link>
-            ))}
-            <Grid item md={10} >
-              <MenuItem className={classes.profile}>
-                <Link to="/login" key={"Login"} >
-                  <Typography
-                    variant="h5"
-                    component="div"
-                    className={classes.links}
-                  >
-                    My Profile
-                  </Typography>
+              <Grid item>
+                <Link to={page.link} key={page.label}>
+                  <MenuItem>
+                    <Typography textAlign="center" className={classes.links}>
+                      {page.label}
+                    </Typography>
+                  </MenuItem>
                 </Link>
-              </MenuItem>
+              </Grid>
+            ))}
+            <Grid item md={10}>
+              {loggedIn ? (
+                <MenuItem className={classes.profile}>
+                  <Link to="/profile" key={"Profile"}>
+                    <Typography
+                      variant="h5"
+                      component="div"
+                      className={classes.links}
+                    >
+                      My Profile
+                    </Typography>
+                  </Link>
+                </MenuItem>
+              ) : (
+                <MenuItem className={classes.profile}>
+                  <Link to="/login" key={"Login"}>
+                    <Typography
+                      variant="h5"
+                      component="div"
+                      className={classes.links}
+                    >
+                      Log in
+                    </Typography>
+                  </Link>
+                </MenuItem>
+              )}
             </Grid>
           </Toolbar>
         </AppBar>

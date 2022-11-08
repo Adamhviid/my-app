@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
-import { Button, Typography, Divider, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
 
 import PageTemplate from "../Common/PageTemplate";
@@ -26,7 +26,7 @@ function RegisterPage() {
   };
 
   return (
-    <div className={classes.container}>
+    <div>
       <PageTemplate title="Register" subtitle="registering an account" />
       <Grid container spacing={2} style={{ textAlign: "center" }}>
         <Grid item md={12}>

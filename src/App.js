@@ -8,6 +8,7 @@ import ArtistPage from './Components/ArtistDetailPage/ArtistPage';
 import ErrorPage from './Components/ErrorPage';
 import LoginPage from './Components/LoginPage/';
 import RegisterPage from './Components/RegisterPage/';
+import ProfilePage from './Components/ProfilePage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/artist/:artistName' element={<ArtistPage />} />
             <Route path='/login/' element={<LoginPage />} />
             <Route path='/register/' element={<RegisterPage />} />
+            <Route path='/profile/' element={<ProfilePage />} />
           </Routes>
         </Container>
       </div>
