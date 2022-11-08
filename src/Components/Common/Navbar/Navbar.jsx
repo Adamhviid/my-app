@@ -56,8 +56,8 @@ function Navbar() {
               </MenuItem>
             </Grid>
             {pages.map((page) => (
-              <Grid item>
-                <Link to={page.link} key={page.label}>
+              <Grid item key={page.label}>
+                <Link to={page.link}>
                   <MenuItem>
                     <Typography textAlign="center" className={classes.links}>
                       {page.label}
