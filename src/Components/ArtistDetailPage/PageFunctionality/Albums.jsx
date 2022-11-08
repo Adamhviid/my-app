@@ -13,22 +13,18 @@ const ArtistAlbums = (props) => {
   const { albums } = props;
   const classes = useStyles();
 
-  const [showDots, setShowDots] = useState(true);
-  const [hideArrow, setHideArrow] = useState(false);
-  const [numbOfRows, setNumbOfRows] = useState(2);
+  const [showDots, setShowDots] = useState(false);
+  const [hideArrow, setHideArrow] = useState(true);
+  const [numbOfRows, setNumbOfRows] = useState(1);
 
   useEffect(() => {
-    if (albums.length <= 5) {
-      setShowDots(false);
-      setHideArrow(true);
-      setNumbOfRows(1);
-    } else {
+    if (albums.length > 5) {
       setShowDots(true);
       setHideArrow(false);
       setNumbOfRows(2);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [albums]);
 
   function handleOnClick(value) {
     console.log(value);
