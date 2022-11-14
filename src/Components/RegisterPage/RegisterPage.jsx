@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
@@ -16,13 +16,28 @@ function RegisterPage() {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [registered, setRegistered] = useState(false);
+
+  useEffect(() => {
+    document.title = "My App - Register";
+
+    if (registered) {
+      window.location.href = "/login";
+    }
+  }, [registered]);
 
   const handleSubmit = async (e) => {
-    await axios.post("http://localhost:3001/auth/register", {
-      email: email.toLowerCase(),
-      password: password,
-    });
-    window.location.href = "/login";
+    await axios
+      .post("http://localhost:3001/auth/register", {
+        email: email.toLowerCase(),
+        password: password,
+      })
+      .then(() => {
+        setRegistered(true);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   return (

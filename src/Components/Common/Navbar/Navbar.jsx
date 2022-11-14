@@ -30,7 +30,7 @@ function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt_token");
+    const token = localStorage.getItem("JWT_TOKEN_SECRET");
     if (token) {
       setLoggedIn(true);
     }

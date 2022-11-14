@@ -20,6 +20,10 @@ function Login() {
 
   useEffect(() => {
     document.title = "My App - Login";
+
+    if (localStorage.getItem("JWT_TOKEN_SECRET")) {
+      window.location.href = "/profile";
+    }
   }, []);
 
   const handleSubmit = async (e) => {
@@ -29,11 +33,10 @@ function Login() {
         password: password,
       })
       .then((res) => {
-        localStorage.setItem("jwt_token", res.data.token);
-        window.location.href = "/profile";
+        localStorage.setItem("JWT_TOKEN_SECRET", res.data.token);
       })
       .catch((res, err) => {
-        console.log("wtf???: " + res);
+        console.log("failed to login user: " + res);
       });
   };
 
