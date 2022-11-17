@@ -1,3 +1,4 @@
+/* import react, { useState, useEffect } from 'react'; */
 import Navbar from './Components/Common/Navbar';
 import { Container } from '@mui/system';
 import { Route, Routes, BrowserRouter } from "react-router-dom";
@@ -11,6 +12,14 @@ import RegisterPage from './Components/RegisterPage/';
 import ProfilePage from './Components/ProfilePage';
 
 function App() {
+  /* const [token, setToken] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('JWT_TOKEN')) {
+      setToken(true);
+    }
+  }, []); */
+
   return (
     <BrowserRouter>
       <div className="App">

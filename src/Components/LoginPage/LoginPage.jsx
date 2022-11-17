@@ -3,6 +3,7 @@ import { createUseStyles } from "react-jss";
 import { Button, Typography, Grid, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import PageTemplate from "../Common/PageTemplate";
 
@@ -14,6 +15,7 @@ const useStyles = createUseStyles({
 
 function Login() {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -21,10 +23,10 @@ function Login() {
   useEffect(() => {
     document.title = "My App - Login";
 
-    if (localStorage.getItem("JWT_TOKEN_SECRET")) {
-      window.location.href = "/profile";
+    if (localStorage.getItem("JWT_TOKEN")) {
+      navigate("/profile");
     }
-  }, []);
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     await axios
@@ -33,7 +35,8 @@ function Login() {
         password: password,
       })
       .then((res) => {
-        localStorage.setItem("JWT_TOKEN_SECRET", res.data.token);
+        localStorage.setItem("JWT_TOKEN", res.data.token);
+        navigate("/profile");
       })
       .catch((res, err) => {
         console.log("failed to login user: " + res);

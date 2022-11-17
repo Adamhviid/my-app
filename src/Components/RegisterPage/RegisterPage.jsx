@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { useNavigate } from "react-router-dom";
 
 import PageTemplate from "../Common/PageTemplate";
 
@@ -13,18 +16,15 @@ const useStyles = createUseStyles({
 
 function RegisterPage() {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [registered, setRegistered] = useState(false);
+  /*   const [registered, setRegistered] = useState(false); */
 
   useEffect(() => {
     document.title = "My App - Register";
-
-    if (registered) {
-      window.location.href = "/login";
-    }
-  }, [registered]);
+  }, []);
 
   const handleSubmit = async (e) => {
     await axios
@@ -33,10 +33,38 @@ function RegisterPage() {
         password: password,
       })
       .then(() => {
-        setRegistered(true);
+        /* setRegistered(true); */
+        confirmAlert({
+          title: "Profile successfully created!",
+          message: "Redirecting to login page...",
+          buttons: [
+            {
+              label: "Very cool!",
+              onClick: () => {
+                navigate("/login");
+              },
+            },
+          ],
+          closeOnEscape: true,
+          closeOnClickOutside: true,
+        });
       })
       .catch((err) => {
-        throw err;
+        if (err.response.status === 409) {
+          confirmAlert({
+            title: "Email already exists!",
+            message: "Please try again.",
+            buttons: [
+              {
+                label: "Ok",
+                onClick: () => {},
+              },
+            ],
+          });
+        } else {
+          alert("failed to register user: " + err);
+          throw err;
+        }
       });
   };
 
