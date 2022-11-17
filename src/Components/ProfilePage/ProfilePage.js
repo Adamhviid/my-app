@@ -13,6 +13,7 @@ function ProfilePage() {
   const [username, setUsername] = useState('');
   const [tmpUsername, setTmpUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [authorization, setAuthorization] = useState();
   const [token, setToken] = useState(localStorage.getItem('JWT_TOKEN'));
 
   useEffect(() => {
@@ -24,7 +25,13 @@ function ProfilePage() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, []);
+
+  function removeTokenAndNavigate() {
+    localStorage.removeItem('JWT_TOKEN');
+    setToken(null);
+    navigate('/login');
+  }
 
   const fetchUser = async () => {
     await axios
@@ -39,6 +46,7 @@ function ProfilePage() {
         setId(res.data.id);
         setUsername(res.data.username);
         setEmail(res.data.email);
+        setAuthorization(res.data.authorization);
         setToken(res.data.token);
       }).catch((err,) => {
         console.log("failed to fetch user: " + err);
@@ -46,9 +54,7 @@ function ProfilePage() {
   }
 
   const handleLogOut = async () => {
-    localStorage.removeItem('JWT_TOKEN');
-    setToken(null);
-    navigate("/profile");
+    removeTokenAndNavigate()
   }
 
   const handleDelete = () => {
@@ -84,9 +90,7 @@ function ProfilePage() {
         console.log("Failed to delete user: " + err);
       }
       );
-    localStorage.removeItem('JWT_TOKEN');
-    setToken(null);
-    navigate("/");
+    removeTokenAndNavigate()
   }
 
   const handleChangeUsername = async () => {
@@ -110,12 +114,19 @@ function ProfilePage() {
           <h1>Profile</h1>
           <p>Username: {username}</p>
           <p>Email: {email}</p>
-
           <Button variant="contained" onClick={() => handleLogOut()}>Log out</Button>
-          <br />
-          <br />
-          <br />
-          <Button variant="contained" style={{ background: "red" }} onClick={() => handleDelete()}>Delete account</Button>
+
+          <p>You have authorization level: {authorization}
+            {authorization < 2 ?
+              <>
+                <span> 'Admin'</span>
+                <br />
+                <br />
+                <br />
+                <Button variant="contained" style={{ background: "red" }} onClick={() => handleDelete()}>Delete account</Button>
+              </>
+              : <span> 'User'</span>}
+          </p>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant='h5' gutterBottom>
