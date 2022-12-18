@@ -23,8 +23,8 @@ function Navbar() {
   const classes = useStyles();
   const pages = [
     { label: "Artists", link: "/artists" },
-    { label: "Songs", link: "/songs" },
     { label: "Albums", link: "/albums" },
+    { label: "Songs", link: "/songs" },
   ];
 
   const [loggedIn, setLoggedIn] = useState(false);
